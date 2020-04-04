@@ -35,3 +35,15 @@ if(!function_exists('wc_ajax_remove_row_fields_html')) {
     }
 
 }
+
+if(!function_exists('wc_ajax_update_quantity_fields_html')) {
+
+    /**
+     * @return string
+     */
+    function wc_ajax_update_quantity_fields_html(): string
+    {
+        return \Dbout\WcAjax\Facades\UpdateQuantity::renderFields();
+    }
+
+}

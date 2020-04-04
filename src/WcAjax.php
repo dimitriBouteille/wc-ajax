@@ -5,6 +5,7 @@ namespace Dbout\WcAjax;
 use Dbout\WcAjax\Actions\Cart\AddCoupon;
 use Dbout\WcAjax\Actions\Cart\RemoveCoupon;
 use Dbout\WcAjax\Actions\Cart\RemoveRow;
+use Dbout\WcAjax\Actions\Cart\UpdateQuantity;
 use Dbout\WcAjax\Actions\InterfaceAction;
 use Dbout\WcAjax\Exceptions\WcAjaxException;
 
@@ -56,6 +57,7 @@ class WcAjax
         $this->registerAction(AddCoupon::getInstance());
         $this->registerAction(RemoveCoupon::getInstance());
         $this->registerAction(RemoveRow::getInstance());
+        $this->registerAction(UpdateQuantity::getInstance());
 
         $this->loadHelpers();
     }
