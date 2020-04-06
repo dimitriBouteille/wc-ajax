@@ -128,6 +128,18 @@ abstract class AbstractAction implements InterfaceAction
             $response = apply_filters('wc_ajax_response_' . $this->action, $response);
         }
 
+        $quantity = WC()->cart->get_cart_contents_count();
+        $defaultResponse = apply_filters('wc_ajax_common_response', ['common' => [
+            'totalPrice' => WC()->cart->get_cart_total(),
+            'subPrice' =>   WC()->cart->get_cart_subtotal(),
+            'quantity' =>   $quantity,
+            'isEmpty' => $quantity <= 0,
+        ]]);
+
+        if(is_array($defaultResponse)) {
+            $response->addData($defaultResponse);
+        }
+
         $this->sendResponse($response);
     }
 

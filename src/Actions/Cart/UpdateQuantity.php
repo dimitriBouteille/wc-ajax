@@ -29,9 +29,9 @@ class UpdateQuantity extends AbstractAction
         $newQuantity = $_REQUEST['quantity'] ?? null;
         $key = $_REQUEST['key'] ?? null;
 
-        if(empty($key) || !is_numeric($newQuantity)) {
+        if(!is_numeric($newQuantity)) {
             return $this->errorFilter(
-                $response->setError(__("Impossible de mettre à jour la quantité de ce produit.")),
+                $response->setError(__("Impossible de mettre à jour la quantité de ce produit. La quantité n'est pas valide.")),
                 'invalid_data'
             );
         }
@@ -41,7 +41,7 @@ class UpdateQuantity extends AbstractAction
         $cartContent = $cart->cart_contents;
         if(!key_exists($key, $cartContent)) {
             return $this->errorFilter(
-                $response->setError(__("Impossible de mettre à jour la quantité de ce produit. Le produit n'est pas dans le panier.")),
+                $response->setError(__("Impossible de mettre à jour la quantité de ce produit. Le produit n'existe pas dans votre panier.")),
                 'not_in_cart'
             );
         }
@@ -70,9 +70,16 @@ class UpdateQuantity extends AbstractAction
                     'max_quantity_limit'
             );
         }
-        
+
         $cart->set_quantity($key, $newQuantity);
-        return $this->successFilter($response->setCode(200));
+        $response->setData([
+            'row' => [
+                'quantity' => (int)$newQuantity,
+                'totalPrice' => apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($product, $newQuantity), $cartItem, $key),
+            ],
+        ])->setCode(200);
+
+        return $this->successFilter($response);
     }
 
 }
