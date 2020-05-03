@@ -58,8 +58,6 @@ class WcAjax
         $this->registerAction(RemoveCoupon::getInstance());
         $this->registerAction(RemoveRow::getInstance());
         $this->registerAction(UpdateQuantity::getInstance());
-
-        $this->loadHelpers();
     }
 
     /**
@@ -82,25 +80,6 @@ class WcAjax
     protected function wcIsEnable(): bool
     {
         return class_exists('woocommerce') && function_exists('WC');
-    }
-
-    /**
-     * Include helper files
-     */
-    protected function loadHelpers(): void
-    {
-        $this->include('/helpers/functions.php');
-    }
-
-    /**
-     * @param string $path
-     */
-    protected function include(string $path): void
-    {
-        $path = __DIR__ . $path;
-        if(file_exists($path)) {
-            require_once $path;
-        }
     }
 
 }

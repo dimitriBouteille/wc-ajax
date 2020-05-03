@@ -1,0 +1,32 @@
+{
+  "name": "dbout/wc-ajax",
+  "description": "Wordpress library that allows to manage Woocommerce action in ajax",
+  "type": "package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dimitri BOUTEILLE",
+      "email": "bonjour@dimitri-bouteille.fr",
+      "homepage": "https://github.com/dimitriBouteille",
+      "role": "Developer"
+    }
+  ],
+  "keywords": ["wordpress", "wp", "woocommerce", "ajax", "cart", "xhr"],
+  "homepage": "https://github.com/dimitriBouteille/wc-ajax",
+  "support": {
+    "issues": "https://github.com/dimitriBouteille/wc-ajax/issues"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dbout\\WcAjax\\": "src/"
+    },
+    "files": [
+      "src/helpers/functions.php"
+    ]
+  }
+}
