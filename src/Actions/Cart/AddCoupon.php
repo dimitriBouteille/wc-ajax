@@ -55,7 +55,7 @@ class AddCoupon extends AbstractAction
             );
         }
 
-        return $this->successFilter($response->setCode(200));
+        return $this->successFilter($response->setCode(200), new \WC_Coupon($couponId));
     }
 
 }

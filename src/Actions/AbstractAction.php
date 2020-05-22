@@ -169,11 +169,12 @@ abstract class AbstractAction implements InterfaceAction
      * Call wc_ajax_success_{ACTION} filter
      *
      * @param ResponseInterface $response
+     * @param mixed ...$data
      * @return ResponseInterface
      */
-    protected function successFilter(ResponseInterface $response): ResponseInterface
+    protected function successFilter(ResponseInterface $response, ...$data): ResponseInterface
     {
-        return apply_filters('wc_ajax_success_'.$this->action, $response);
+        return apply_filters('wc_ajax_success_'.$this->action, $response, ...$data);
     }
 
     /**
